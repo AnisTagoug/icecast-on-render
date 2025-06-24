@@ -5,20 +5,23 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y icecast2 && \
     apt-get clean
 
-# Créer l'utilisateur icecast et l'ajouter au groupe existant "icecast"
+# Créer l'utilisateur icecast (ajouté au groupe existant)
 RUN useradd -m -g icecast icecast
 
-# Copier la config
+# Copier la configuration Icecast
 COPY icecast.xml /etc/icecast2/icecast.xml
 
-# Donner les permissions sur le fichier de config
+# Donner les droits à l'utilisateur sur les fichiers nécessaires
 RUN chown -R icecast:icecast /etc/icecast2
 
-# Exposer le port d'écoute
+# Créer un dossier de logs accessible (évite permission denied)
+RUN mkdir -p /tmp/icecast-logs && chown -R icecast:icecast /tmp/icecast-logs
+
+# Exposer le port Icecast
 EXPOSE 8000
 
 # Utiliser l'utilisateur non-root
 USER icecast
 
-# Démarrer Icecast
+# Lancer Icecast avec le fichier de configuration
 CMD ["icecast2", "-c", "/etc/icecast2/icecast.xml"]
