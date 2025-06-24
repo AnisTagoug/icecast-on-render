@@ -34,6 +34,8 @@
     <logdir>/var/log/icecast2</logdir>
     <webroot>/usr/share/icecast2/web</webroot>
     <adminroot>/usr/share/icecast2/admin</adminroot>
+    <runuser>icecast</runuser>
+    <rungroup>icecast</rungroup>
   </paths>
 
   <logging>
