@@ -29,9 +29,10 @@
   </mount>
 
   <fileserve>1</fileserve>
+
   <paths>
     <basedir>/usr/share/icecast2</basedir>
-    <logdir>/var/log/icecast2</logdir>
+    <logdir>/tmp/icecast-logs</logdir> <!-- ✅ corrigé ici -->
     <webroot>/usr/share/icecast2/web</webroot>
     <adminroot>/usr/share/icecast2/admin</adminroot>
     <runuser>icecast</runuser>
